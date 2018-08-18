@@ -1,0 +1,22 @@
+person
+    - id
+    - full name
+    - username gitter
+    - username twitter
+    - email 
+    - business name
+    - business link
+    - pledge
+    - lifetime donation
+    - current patreon status patron/former patron/follower/none
+    - client y/n/previous
+    - photo
+    - avatar
+    - interactionID
+
+interactions
+    - personID
+    - id
+    - date
+    - text
+    - action
