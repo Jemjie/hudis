@@ -1,0 +1,25 @@
+{
+  "name": "hudis",
+  "version": "0.1.0",
+  "description": "nu fone hu dis?",
+  "main": "index.js",
+  "scripts": {
+    "postgraphile": "postgraphile --watch --simple-collections both -c postgres:///hudis -s app_public --append-plugins @graphile-contrib/pg-simplify-inflector",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jemjie/hudis.git"
+  },
+  "author": "Jem Gillam <6413628+jemgillam@users.noreply.github.com>",
+  "license": "AGPL-3.0",
+  "bugs": {
+    "url": "https://github.com/Jemjie/hudis/issues"
+  },
+  "homepage": "https://github.com/Jemjie/hudis#readme",
+  "dependencies": {
+    "@graphile-contrib/pg-simplify-inflector": "2.0.0",
+    "nodemon": "1.18.3",
+    "postgraphile": "4.0.0-rc.3"
+  }
+}

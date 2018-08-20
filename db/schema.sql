@@ -28,8 +28,8 @@ create table app_public.services (
 
 create table app_public.profiles (
   id serial primary key,
-  service_id int not null references app_public.services,
   person_id int references app_public.people,
+  service_id int not null references app_public.services,
   real_name text,
   username text, 
   email text,
@@ -37,5 +37,52 @@ create table app_public.profiles (
   monthly_income int,
   total_income int,
   status app_public.profile_status,
-  check(real_name is not null or username is not null)
+  check(real_name is not null or username is not null),
+  unique(service_id, username)
 );
+
+create table app_public.interactions (
+  id serial primary key,
+  profile_id int not null references app_public.profiles,
+  date timestamptz not null default now(),
+  description text not null, 
+  requires_action boolean not null default false,
+  note text not null default ''
+);
+
+-------------------------------------------------------------
+
+insert into app_public.services (name, slug) values
+  ('gitter', 'gitter'),
+  ('twitter', 'twitter'),
+  ('Patreon', 'patreon'),
+  ('email', 'email'),
+  ('GitHub', 'github'),
+  ('Client', 'client'),
+  ('Slack', 'slack'),
+  ('Reddit', 'reddit'),
+  ('Reactiflux', 'reactiflux');
+
+insert into app_public.profiles (service_id, real_name, username) values
+  (1, 'John Gitter', 'joner'),
+  (2, 'Jack Twitter', 'jack'),
+  (3, 'Princess Patreon', 'Princess'), 
+  (5, 'Gerri Github', 'gerrigithub');
+  
+
+insert into app_public.people (nickname) values
+  ('Ellie Client');
+
+insert into app_public.profiles (person_id, service_id, real_name, username) values
+  (1, 1, 'Ellie C', 'elliec'),
+  (1, 3, 'Ellie Client', 'Ellie Client'),
+  (1, 4, 'Ellie Client', 'Ellie C'),
+  (1, 5, 'Ellie C', 'elliex111');
+
+insert into app_public.interactions (profile_id, description) values
+  (1, 'Lets work on postgraphile'),
+  (2, 'Issue 345'),
+  (3, 'Work on Lambda'),
+  (3, 'Did you work on Lamba?'),
+  (6, 'Can you work with me please?'),
+  (7, 'OK here is my private issue');
